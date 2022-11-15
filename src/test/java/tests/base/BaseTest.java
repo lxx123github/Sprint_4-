@@ -7,7 +7,7 @@ import pages.base.BasePage;
 import pages.order.OrderPage;
 
 public class BaseTest {
-    protected WebDriver driver = CommonActions.createDriver();
+    protected static WebDriver driver = CommonActions.createDriver();
     protected BasePage basePage = new BasePage(driver);
     protected AccordionPage accordionPage = new AccordionPage(driver);
     protected OrderPage orderPage = new OrderPage(driver);
