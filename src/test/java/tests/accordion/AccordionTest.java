@@ -1,7 +1,6 @@
 package tests.accordion;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import pages.accordion.AccordionPage;
 import pages.base.BasePage;
 import tests.base.BaseTest;
@@ -28,9 +27,16 @@ import static org.junit.Assert.assertEquals;
     public class AccordionTest extends BaseTest{
         private final String number;
         private final String expected;
+        AccordionPage accordionPage = new AccordionPage(driver);
+
         public AccordionTest(String number, String expected) {
             this.number = number;
             this.expected = expected;
+        }
+        @Before
+        public void openStend() {
+            BasePage basePage = new BasePage(driver);
+            basePage.goToUrl(SAMOKAT_URL);
         }
         @Parameterized.Parameters
         public static   Object[][] getSumData() {
@@ -49,12 +55,15 @@ import static org.junit.Assert.assertEquals;
 
         @Test
         public void checkTextInAccordion() {
-            BasePage basePage = new BasePage(driver);
-            basePage.goToUrl(SAMOKAT_URL);
-            AccordionPage accordionPage = new AccordionPage(driver);
             String actual = accordionPage.checkTextInToAccordion(number);
             assertEquals(expected, actual);
         }
+        @AfterClass
+        public static void closeBrowser() {
+            BasePage basePage = new BasePage(driver);
+            basePage.closeDriver();
+        }
+
     }
 
 
